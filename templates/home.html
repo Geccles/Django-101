@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+    <div style="display: flex; align-items: center; flex-direction: column;">
+        {% for post in posts %}
+            <div style="padding: 1rem;" onclick="location.href='{% url 'feed:detail' post.id %}'" >
+                <p>{{ post.text }}</p>
+                {% thumbnail post.image "300x300" crop="center" as image %}
+                    <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}">
+                {% endthumbnail %}
+                </div>
+            <hr />
+        {% endfor %}
+    </div>
+{% endblock %}
